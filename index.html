@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+    <title>Workout Visualization Dashboard</title>
+</head>
+<body>
+    <!-- Header Section -->
+    <section class="hero is-primary is-bold">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">Workout Visualization for Valerian</h1>
+                <p class="subtitle">Click on a date to view workout graphs</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workout Dates Section -->
+    <section class="container m-4">
+        <div class="columns is-multiline">
+            <div class="column is-one-third">
+                <button class="button is-fullwidth is-primary is-outlined" onclick="showGraphs('8-10-2024')">8-10-2024</button>
+            </div>
+            <div class="column is-one-third">
+                <button class="button is-fullwidth is-primary is-outlined" onclick="showGraphs('10-10-2024')">10-10-2024</button>
+            </div>
+            <div class="column is-one-third">
+                <button class="button is-fullwidth is-primary is-outlined" onclick="showGraphs('14-10-2024')">14-10-2024</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Graph Display Section -->
+    <section id="graph-section" class="container" style="display: none; margin-top: 20px;">
+        <h2 class="title" id="day-title"></h2>
+        <div id="graph-container">
+            <!-- Placeholder for graphs -->
+            <p class="subtitle">Your workout graphs will appear here.</p>
+        </div>
+    </section>
+
+    <script>
+        function showGraphs(date) {
+            // Show the graph section
+            document.getElementById("graph-section").style.display = "block";
+            // Set the title to the selected date
+            document.getElementById("day-title").textContent = "Workout for " + date;
+            // Placeholder content for graph area
+            document.getElementById("graph-container").innerHTML = "<p class='subtitle'>Loading workout graphs for " + date + "...</p>";
+            // Additional code can be added here to dynamically load graphs
+        }
+    </script>
+</body>
+</html>
