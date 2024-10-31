@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+     <!-- Font Awesome for Icons -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+     <title>Data Entry Form for Valerian</title>
+</head>
+<body>
+    <section class="hero is-primary is-bold">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">Data Entry Form for Valerian</h1>
+            </div>
+        </div>
+        <!-- Icon Link to Visualization Dashboard -->
+        <a href="https://moatef123.github.io/data-visualization/" target="_blank" class="icon is-large has-text-white" title="Go to Visualization Dashboard" style="position: absolute; top: 20px; right: 20px;">
+            <i class="fas fa-chart-line fa-2x"></i>
+        </a>
+    </div>
+</div>
+</section>
+    <form id="form" class="container m-4 pl-4" method="POST" action="https://script.google.com/macros/s/AKfycbw9WKlKlRurgwwbj_57wY4AM29rt5MaSdAWNbDpqWAq1r_MQ1JRZJ4HjaUz0bKCyDGu/exec">
+        <div class="field">
+            <label class="label">Date</label>
+            <div class="control">
+                <input class="input" type="date" name="Date" required />
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Superman Hold (Minutes)</label>
+            <div class="control">
+                <input class="input" type="number" placeholder="Minutes" name="Superman Hold Minutes" required />
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Cardio - Rowing (Minutes)</label>
+            <div class="control">
+                <input class="input" type="number" placeholder="Minutes" name="Cardio Rowing Minutes" required />
+            </div>
+        </div>
+
+        <!-- Hollow Hold -->
+        <div class="field">
+            <label class="label">Hollow Hold</label>
+            <div class="control">
+                <input class="input" type="number" placeholder="Number of Sets" name="Hollow Hold Sets" required />
+                <input class="input" type="number" placeholder="Repetitions Set 1" name="Hollow Hold Repetitions 1" required />
+                <input class="input" type="number" placeholder="Repetitions Set 2" name="Hollow Hold Repetitions 2" required />
+                <input class="input" type="number" placeholder="Repetitions Set 3" name="Hollow Hold Repetitions 3" required />
+            </div>
+        </div>
+
+        <!-- Push-up Repetitions -->
+        <div class="field">
+            <label class="label">Push-ups</label>
+            <div class="control">
+                <input class="input" type="number" placeholder="Number of Sets" name="Push-ups Sets" required />
+                <input class="input" type="number" placeholder="Repetitions Set 1" name="Push-ups Repetitions 1" required />
+                <input class="input" type="number" placeholder="Repetitions Set 2" name="Push-ups Repetitions 2" required />
+                <input class="input" type="number" placeholder="Repetitions Set 3" name="Push-ups Repetitions 3" required />
+            </div>
+        </div>
+
+        <!-- Pull-up Repetitions -->
+        <div class="field">
+            <label class="label">Pull-ups</label>
+            <div class="control">
+                <input class="input" type="number" placeholder="Number of Sets" name="Pull-ups Sets" required />
+                <input class="input" type="number" placeholder="Repetitions Set 1" name="Pull-ups Repetitions 1" required />
+                <input class="input" type="number" placeholder="Repetitions Set 2" name="Pull-ups Repetitions 2" required />
+                <input class="input" type="number" placeholder="Repetitions Set 3" name="Pull-ups Repetitions 3" required />
+            </div>
+        </div>
+
+        <!-- Dips Repetitions -->
+        <div class="field">
+            <label class="label">Dips</label>
+            <div class="control">
+                <input class="input" type="number" placeholder="Number of Sets" name="Dips Sets" required />
+                <input class="input" type="number" placeholder="Repetitions Set 1" name="Dips Repetitions 1" required />
+                <input class="input" type="number" placeholder="Repetitions Set 2" name="Dips Repetitions 2" required />
+                <input class="input" type="number" placeholder="Repetitions Set 3" name="Dips Repetitions 3" required />
+            </div>
+        </div>
+
+        <!-- Chin-Ups Repetitions -->
+        <div class="field">
+            <label class="label">Chin-Ups</label>
+            <div class="control">
+                <input class="input" type="number" placeholder="Number of Sets" name="Chin-Ups Sets" required />
+                <input class="input" type="number" placeholder="Repetitions Set 1" name="Chin-Ups Repetitions 1" required />
+                <input class="input" type="number" placeholder="Repetitions Set 2" name="Chin-Ups Repetitions 2" required />
+                <input class="input" type="number" placeholder="Repetitions Set 3" name="Chin-Ups Repetitions 3" required />
+            </div>
+        </div>
+
+        <div class="field is-grouped">
+            <div class="control">
+                <button class="button is-primary" type="submit" id="submit-button">Submit</button>
+            </div>
+            <div class="control">
+                <button class="button is-danger" type="button" onclick="document.getElementById('form').reset();">Cancel</button>
+            </div>
+        </div>
+    </form>
+    <div id="message" style="display: none; margin: 20px; font-weight: bold; color: green; padding: 8px; background-color: beige; border-radius: 4px;"></div>
+
+    <script>
+        document.getElementById("form").addEventListener("submit", function (e) {
+            e.preventDefault(); // Prevent the default form submission
+            document.getElementById("message").textContent = "Submitting..";
+            document.getElementById("message").style.display = "block";
+            document.getElementById("submit-button").disabled = true;
+
+            // Collect the form data
+            var formData = new FormData(this);
+            var keyValuePairs = [];
+            for (var pair of formData.entries()) {
+                keyValuePairs.push(pair[0] + "=" + encodeURIComponent(pair[1]));
+            }
+
+            var formDataString = keyValuePairs.join("&");
+
+            // Send a POST request to your Google Apps Script
+            fetch(this.action, {
+                method: "POST",
+                body: formDataString,
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+            })
+            .then(function (response) {
+                if (response.ok) {
+                    // Display a success message
+                    document.getElementById("message").textContent = "Data submitted successfully!";
+                    document.getElementById("message").style.backgroundColor = "green";
+                    document.getElementById("message").style.color = "beige";
+                    // Reset the form
+                    document.getElementById("form").reset();
+                } else {
+                    throw new Error("Failed to submit the form.");
+                }
+            })
+            .catch(function (error) {
+                // Handle errors
+                console.error(error);
+                document.getElementById("message").textContent = "An error occurred while submitting the form.";
+                document.getElementById("message").style.display = "block";
+            })
+            .finally(function () {
+                // Re-enable the submit button
+                document.getElementById("submit-button").disabled = false;
+            });
+        });
+    </script>
+</body>
+</html>
